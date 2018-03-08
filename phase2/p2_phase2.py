@@ -8,43 +8,46 @@ import random
 
 class Deck:     
 	def __init__(self):         
-		self.deck = self.create_deck()
+		self.deck = self.createDeck()
 		self.flag = True
 
 	@staticmethod
-	def create_deck():
+	def createDeck():
 		cardType = [' of Spades', ' of Hearts', ' of Clubs', ' of Diamonds']
 		cardNames = ['Ace', 'Two', 'Three', 'For', 'Five', 'Six', 'Seven', 
     				'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King']
 		return [cn + ct for cn in cardNames for ct in cardType]
 	
-	def remove_card_from_deck(self, cardToRemove):
+	def removeCardFromDeck(self, cardToRemove):
 		self.deck.remove(cardToRemove)
 	
-	def shuffle_deck(self):
+	def addCardToDeck(self, cardToAdd):
+		self.deck.append(cardToAdd)
+	
+	def shuffleDeck(self):
 		random.shuffle(self.deck)
 
-	def get_cards(self, numberOfCards):
+	def getCards(self, numberOfCards):
 		cards = []
 		for i in range(numberOfCards):
 			card = self.deck.pop(self.deck.index(self.deck[0]))
 			cards.append(card)
 		return cards
 
-	def play_game(self):
+	def playGame(self):
 		print('------------')
 		print("Let's start!")
 		print('------------')
 		players = input("Insert players separated by ',': ").split(',')
 		playersCards = []
-		self.create_deck()
-		self.shuffle_deck()
+		self.createDeck()
+		self.shuffleDeck()
 		
 		for player in players:
-			playerCards = self.get_cards(2)
+			playerCards = self.getCards(2)
 			playersCards.append({player: playerCards})
 		
-		restOfTheCards = self.get_cards(3)
+		restOfTheCards = self.getCards(3)
 
 		for player in playersCards:
 			player[list(player.keys())[0]] += restOfTheCards
@@ -52,7 +55,7 @@ class Deck:
 			for card in player[list(player.keys())[0]]:
 				print("************** " + card)
 
-	def create_menu(self):
+	def createMenu(self):
 		while self.flag:
 			print('================================')
 			print('1. Play game!')
@@ -65,13 +68,13 @@ class Deck:
 			userInput = input("Insert your choice: ")
 
 			if userInput == '1':
-				self.play_game()
+				self.playGame()
 				self.flag = False
 			elif userInput == '2':
 				cardToRemove = input("Insert the card: ")
 				for card in self.deck:
 					if cardToRemove.strip().lower() == card.lower():
-						self.remove_card_from_deck(card)
+						self.removeCardFromDeck(card)
 						break
 				print(self.deck)
 			elif userInput == '3':
@@ -79,10 +82,10 @@ class Deck:
 				self.deck.append(cardToAdd.strip())
 				print(self.deck)
 			elif userInput.strip() == '4':
-				self.shuffle_deck()
+				self.shuffleDeck()
 				print(self.deck)
 			elif userInput.strip() == '5':
-				self.deck = self.create_deck()
+				self.deck = self.createDeck()
 				print(self.deck)
 			elif userInput == 'q' or userInput == 'Q':
 				print('Good Bye!')
@@ -93,4 +96,4 @@ class Deck:
 
 if __name__ == '__main__':     
 	deck = Deck()
-	deck.create_menu()
+	deck.createMenu()
