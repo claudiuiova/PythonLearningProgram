@@ -29,7 +29,7 @@ class Deck:
 
 	def getCards(self, numberOfCards):
 		cards = []
-		for i in range(numberOfCards):
+		for _ in range(numberOfCards):
 			card = self.deck.pop(self.deck.index(self.deck[0]))
 			cards.append(card)
 		return cards

@@ -60,9 +60,6 @@ class Game(object):
 	def __init__ (self, *players):
 		self.dealer = Dealer()
 		self.list_with_players = [*players]
-	
-	# def show_card_from_table(self):
-
 
 	def play_game(self):
 		self.dealer.shuffle_deck()
