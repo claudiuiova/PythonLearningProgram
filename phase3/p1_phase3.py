@@ -18,11 +18,12 @@ def get_root_val(tree):
 
 def traverse_in_preorder(tree):
     if tree:
-        print(get_root_val(tree))
-        traverse_in_preorder(get_left_child(tree))
-        traverse_in_preorder(get_right_child(tree))
+        yield get_root_val(tree)
+        yield from traverse_in_preorder(get_left_child(tree))
+        yield from traverse_in_preorder(get_right_child(tree))
 
 if __name__ == '__main__':
     tree = ('b', ('a', None, None), ('z', ('c', None, None), ('zz', None, None)))
-    traverse_in_preorder(tree)
+    for node in traverse_in_preorder(tree):
+        print(node)
 
