@@ -26,4 +26,4 @@ if __name__ == '__main__':
     tree = ('b', ('a', None, None), ('z', ('c', None, None), ('zz', None, None)))
     for node in traverse_in_preorder(tree):
         print(node)
-
+        
