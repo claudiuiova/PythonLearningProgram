@@ -8,12 +8,13 @@ Output: set([1, 2, 3]), set([2, 3]), set([1, 3]), set([3]),
 
 import itertools
 
-def findsubsets(_sets, r):
+def find_subsets(_sets, r):
     for i in range(r):
         subsets = itertools.combinations(_sets, i) #return subsets as tuples
         for s in subsets:
             s = set(s) #optional
             yield s
 
-for i in findsubsets(set([1,2,3]), 4):
+my_set = set([1,2,3])
+for i in find_subsets(set([1,2,3]), len(my_set) + 1):
     print (i)
