@@ -7,9 +7,9 @@ import time
 
 def arguments_dec(threshold = None):
     def time_track(func):
-        def func_wrapper():
+        def func_wrapper(*args, **kwargs):
             time_start = time.time()
-            func()
+            func(*args, **kwargs)
             elapsed_time = time.time() - time_start
             
             if not callable(threshold):
@@ -22,7 +22,7 @@ def arguments_dec(threshold = None):
                 return elapsed_time
             
         return func_wrapper
-
+    
     if callable(threshold):
         return time_track(threshold)
     else:
@@ -40,5 +40,12 @@ def my_func1():
         pass
     return ("Somtext1")
 
+@arguments_dec
+def my_func2(x):
+    for _ in range(x):
+        pass
+    return ("Somtext2")
+
 print(my_func())
 print(my_func1())
+print(my_func2(9999999))
